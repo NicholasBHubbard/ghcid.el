@@ -50,7 +50,7 @@
   "TODO"
   (get-buffer-create (ghcid--buffer-name)))
 
-(defun ghcid-start ()
+(defun ghcid ()
   "TODO"
   (interactive)
   (when-let ((buf (ghcid--get-buffer-create)))
