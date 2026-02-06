@@ -23,7 +23,7 @@
 (require 'compile)
 (require 'comint)
 
-(defcustom ghcid-default nil
+(defcustom ghcid-default-opts nil
   "TODO"
   )
 
