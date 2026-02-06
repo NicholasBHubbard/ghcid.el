@@ -64,8 +64,8 @@
 (define-minor-mode ghcid-mode
   "Toggle `ghcid-mode'."
   :global nil
-  :group 'ghcid-mode
-  :require 'ghcid-mode
+  :group 'ghcid
+  :require 'ghcid
   (if ghcid-mode
       (progn
         (setq-local comint-buffer-maximum-size ghcid-buffer-maximum-lines)
