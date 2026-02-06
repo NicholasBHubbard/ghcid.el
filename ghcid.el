@@ -56,9 +56,9 @@
   (when-let ((buf (ghcid--get-buffer-create)))
     (with-current-buffer buf
       (unless ghcid-mode
+        (ghcid-mode 1)
         (let ((compilation-buffer-name-function #'ghcid--buffer-name))
-          (compile (ghcid--command) t))
-        (ghcid-mode 1)))
+          (compile (ghcid--command) t))))
     buf))
 
 (define-minor-mode ghcid-mode
