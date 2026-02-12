@@ -1,4 +1,4 @@
-;;; ghcid.el --- ghcid support in Emacs with compilation-mode -*- lexical-binding: t -*-
+;;; ghcid.el --- ghcid support in Emacs -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2026 Nicholas B. Hubbard <nicholashubbard@posteo.net>
 ;;
