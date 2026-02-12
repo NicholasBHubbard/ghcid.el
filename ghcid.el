@@ -44,14 +44,16 @@
   :type 'string
   :group 'ghcid)
 
-(defcustom ghcid-project-system nil
+(defcustom ghcid-project-system 'auto-detect
   "Project system used to determine current project.
 
 When nil, ghcid.el auto-detects, preferring projectile when available,
 otherwise falling back to `project.el'."
-  :type '(choice (const :tag "auto-detect (prefers projectile)" nil)
+  :type '(choice (const :tag "no project system" none)
+                 (const :tag "auto-detect (prefers projectile)" auto-detect)
                  (const :tag "project.el" project)
-                 (const :tag "projectile" projectile)))
+                 (const :tag "projectile" projectile))
+  :group 'ghcid)
 
 (defcustom ghcid-buffer-maximum-lines 500
   "Maximum number of lines for a ghcid buffer.")
@@ -68,20 +70,24 @@ otherwise falling back to `project.el'."
 (defconst ghcid--osc-title-regexp "\e\\]0;.*?\e\\\\"
   "Regexp matching OSC terminal title escape sequences.")
 
-(defun ghcid--use-projectile ()
-  "Return T if projectile is the project system. NIL means using project.el."
-  (let ((project-system (or ghcid-project-system
-                            (if (featurep 'projectile) 'projectile 'project))))
-    (eq project-system 'projectile)))
+(defun ghcid--default-directory ()
+  "TODO"
+  (expand-file-name
+   (or (cond ((eq ghcid-project-system 'none)
+              nil)
+             ((eq ghcid-project-system 'project)
+              (ignore-errors (project-root (project-current))))
+             ((eq ghcid-project-system 'projectile)
+              (projectile-project-root))
+             ((eq ghcid-project-system 'auto-detect)
+              (let ((ghcid-project-system (if (featurep 'projectile)
+                                              'projectile 'project)))
+                (ghcid--default-directory))))
+       default-directory)))
 
-(defun ghcid--current-project ()
-  "Return the current project root directory or NIL if no project is found.
-
-Note that if using projectile, the returned project is a string of the project
-directory, while if using project.el a project object is returned."
-  (if (ghcid--use-projectile)
-      (projectile-project-root)
-    (project-current)))
+(defun ghcid--project-name ()
+  "Return the name of the current project or basename of `default-directory'."
+  (file-name-nondirectory (directory-file-name (ghcid--default-directory))))
 
 (defun ghcid--buffer-name ()
   "Return the ghcid buffer name.
@@ -90,10 +96,7 @@ If `ghcid-buffer-name' is non-nil use it, otherwise determine if currently in
 a project, and return a name based off the project name. If not in a project
 then return `ghcid-default-buffer-name'. "
   (or ghcid-buffer-name
-      (when-let* ((proj (ghcid--current-project))
-                  (proj-name (if (ghcid--use-projectile)
-                                 (projectile-project-name proj)
-                               (project-name proj))))
+      (when-let ((proj-name (ghcid--project-name)))
         (format "*ghcid %s*" proj-name))
       ghcid-default-buffer-name))
 
@@ -119,11 +122,8 @@ of marker files in DIR:
 - `cabal' otherwise.
 
 Note that these are essentially the same heuristics that ghcid itself uses."
-  (let* ((proj (or dir (ghcid--current-project)))
-         (default-directory (or dir (if (ghcid--use-projectile)
-                                        proj
-                                      (project-root proj))
-                                default-directory)))
+  (let ((default-directory
+         (or dir (ghcid--default-directory) default-directory)))
     (cond ((file-exists-p "stack.yaml") 'stack)
           ((file-exists-p ".ghci") 'ghci)
           (t 'cabal))))
@@ -171,13 +171,9 @@ The process is started with `comint-exec' using arguments from
 (defun ghcid-start ()
   "Start/restart ghcid for the current project and display its buffer."
   (interactive)
-  (let ((proj (ghcid--current-project))
-        (buf (ghcid--get-buffer-create)))
+  (let ((buf (ghcid--get-buffer-create)))
     (with-current-buffer buf
-      (setq-local default-directory
-                  (if proj
-                      (if (ghcid--use-projectile) proj (project-root proj))
-                    default-directory))
+      (setq-local default-directory (ghcid--default-directory))
       (ghcid-mode))
     (ghcid--exec-ghcid buf)
     (pop-to-buffer buf)))
