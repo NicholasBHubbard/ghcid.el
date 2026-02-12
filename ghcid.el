@@ -45,7 +45,7 @@
   :group 'ghcid)
 
 (defcustom ghcid-project-system nil
-  "Project system used to determine project roots.
+  "Project system used to determine current project.
 
 When nil, ghcid.el auto-detects, preferring projectile when available,
 otherwise falling back to `project.el'."
