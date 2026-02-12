@@ -71,7 +71,11 @@ otherwise falling back to `project.el'."
   "Regexp matching OSC terminal title escape sequences.")
 
 (defun ghcid--default-directory ()
-  "TODO"
+  "Return the directory to use as `default-directory' for ghcid.
+
+The directory is chosen according to `ghcid-project-system'.
+
+The returned value is always an absolute directory name via `expand-file-name'."
   (expand-file-name
    (or (cond ((eq ghcid-project-system 'none)
               nil)
