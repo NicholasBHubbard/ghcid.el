@@ -118,7 +118,7 @@ of marker files in DIR:
 - `ghci' if a \".ghci\" file is present.
 - `cabal' otherwise.
 
-Note that these are essentially same heuristics that ghcid itself uses."
+Note that these are essentially the same heuristics that ghcid itself uses."
   (let* ((proj (or dir (ghcid--current-project)))
          (default-directory (or dir (if (ghcid--use-projectile)
                                         proj
