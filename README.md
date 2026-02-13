@@ -4,7 +4,7 @@ This package runs ghcid in a `comint-mode` derived buffer (`ghcid-mode`), output
 
 The ghcid repository contains its own [ghcid.el](https://github.com/ndmitchell/ghcid/blob/master/plugins/emacs/ghcid.el), however it only works for stack projects, doesn't work on the latest Emacs version, and is not currently being maintained.
 
-# Commands
+# Interactive Commands
 
 #### ghcid-start
 
