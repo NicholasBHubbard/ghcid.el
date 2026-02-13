@@ -189,7 +189,7 @@ The process is started with `comint-exec' using arguments from
       (pop-to-buffer buf)
     (user-error "No buffer named %s" (ghcid--buffer-name))))
 
-(defun ghcid-start-or-pop-to-buffer ()
+(defun ghcid-pop-to-buffer-or-start ()
   "Pop to the project's ghcid buffer if it exists, otherwise start ghcid."
   (interactive)
   (if-let ((buf (ghcid--get-buffer)))
