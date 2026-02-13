@@ -51,7 +51,7 @@ The argument list for ghcid is constructed from two layers of options, ghcid opt
 
 #### ghcid options
 
-The user can specify ghcid options via the variables `ghcid-default-opts` (default: `(list "--reverse-errors" "--color=always")`) and `ghcid-extra-opts` (default: `nil`).
+The user can specify ghcid options via the variables `ghcid-default-opts` (default: `'("--reverse-errors" "--color=always")`) and `ghcid-extra-opts` (default: `nil`).
 
 In general, `ghcid-default-opts` is intended to be set by the user to stable defaults. Alternately `ghcid-extra-opts` is intended for programmatic or per-invocation adjustments.
 
@@ -61,6 +61,6 @@ Never specify a `--command` option in these variables because this is the job of
 
 #### GHCi options
 
-The user can specify options to ghcid's underlying GHCi invocation via the variables `ghcid-ghci-default-opts` (default: `(list "-ferror-spans" "-fdiagnostics-color=always")`) and `ghcid-ghci-extra-opts` (default: `nil`). These variables are used to build the ghcid `--command` argument.
+The user can specify options to ghcid's underlying GHCi invocation via the variables `ghcid-ghci-default-opts` (default: `'("-ferror-spans" "-fdiagnostics-color=always")`) and `ghcid-ghci-extra-opts` (default: `nil`). These variables are used to build the ghcid `--command` argument.
 
 In general, `ghcid-ghci-default-opts` is intended to be set by the user to stable defaults. Alternately `ghcid-ghci-extra-opts` is intended for programmatic or per-invocation adjustments.
