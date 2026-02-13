@@ -23,8 +23,8 @@ Pops to the ghcid buffer for the current project if it exists, otherwise creates
 ghcid.el chooses a working directory (and thus a buffer name) based on the `ghcid-project-system` variable, falling back to the current `default-directory` when no project root can be determined. The `ghcid-project-system` variable may be one of four values:
 
 * `auto-detect` (default): if projectile is loaded, use projectile, otherwise use project.el.
-* `project`: use project.el by calling
-* `projectile`: use Projectile
+* `projectile`: use Projectile (`projectile-project-root`)
+* `project`: use project.el (`project-root`)
 * `none`: disable project detection and just use the current `default-directory`.
 
 The chosen directory is stored as the ghcid buffer’s `default-directory` when you run M-x ghcid-start.
