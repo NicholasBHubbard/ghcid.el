@@ -4,7 +4,7 @@
 ;;
 ;; Licensed under the same terms as Emacs and under the MIT license.
 
-;; SPDX-License-Identifier: MIT
+;; SPDX-License-Identifier: BSD-3-Clause
 
 ;; Author: Nicholas B. Hubbard <nicholashubbard@posteo.net>
 ;; URL: https://github.com/NicholasBHubbard/ghcid.el
