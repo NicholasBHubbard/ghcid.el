@@ -51,7 +51,9 @@ The argument list for ghcid is constructed from two layers of options, ghcid opt
 
 #### ghcid options
 
-These options are specified via the variables `ghcid-default-opts` (default: (list "--reverse-errors" "--color=always")`) and `ghcid-extra-opts` (defauls to nil). In general, `ghcid-default-opts` is intended to be set by the user to stable defaults. Alternately `ghcid-extra-opts` is intended for programmatic or per-invocation adjustments.
+These options are specified via the variables `ghcid-default-opts` (default: `(list "--reverse-errors" "--color=always")`) and `ghcid-extra-opts` (defauls to nil).
+
+In general, `ghcid-default-opts` is intended to be set by the user to stable defaults. Alternately `ghcid-extra-opts` is intended for programmatic or per-invocation adjustments.
 
 Never specify a `--command` option in these variables. That is the job of the [GHCi options](#ghci-options).
 
