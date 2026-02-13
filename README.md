@@ -37,13 +37,13 @@ If you are not in a project or project detection fails, it falls back to `ghcid-
 
 # Build System Detection
 
-When `ghcid-start` runs, the ghcid `--command=...` argument is built automatically by inspecting the project directory.
+When `ghcid-start` runs, the ghcid `--command` argument is built automatically by inspecting the project directory.
 
 * If a stack.yaml file exists, it assumes a Stack project and uses `stack ghci ...`
 * If a .ghci file exists, it assumes a plain GHCi project and uses `ghci ...`
 * Otherwise it is assumed to be a cabal project and uses `cabal repl ...`
 
-This is essentially the same heuristic used by ghcid itself if the `--command=...` argument is omitted.
+This is essentially the same heuristic used by ghcid itself if the `--command` argument is omitted.
 
 # Customizing The ghcid Command
 
