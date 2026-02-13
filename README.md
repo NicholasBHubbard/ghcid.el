@@ -25,7 +25,7 @@ ghcid.el chooses a working directory (and thus a buffer name) based on the `ghci
 * `auto-detect` (default): if projectile is loaded, use projectile, otherwise use project.el.
 * `project`: use project.el by calling
 * `projectile`: use Projectile
-* `none`: disable project detection and just use the current default-directory.
+* `none`: disable project detection and just use the current `default-directory`.
 
 The chosen directory is stored as the ghcid buffer’s `default-directory` when you run M-x ghcid-start.
 
