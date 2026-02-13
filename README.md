@@ -55,6 +55,8 @@ The user can specify ghcid options via the variables `ghcid-default-opts` (defau
 
 In general, `ghcid-default-opts` is intended to be set by the user to stable defaults. Alternately `ghcid-extra-opts` is intended for programmatic or per-invocation adjustments.
 
+The `--reverse-errors` option is enabled by default because without it ghcid’s output tends to interact poorly with a comint buffer.
+
 Never specify a `--command` option in these variables. That is the job of the [GHCi options](#ghci-options).
 
 #### GHCi options
